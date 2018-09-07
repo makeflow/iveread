@@ -7,7 +7,11 @@
   "bin": {
     "iveread": "bld/program/main.js"
   },
-  "scripts": {},
+  "scripts": {
+    "build": "rimraf bld/program && tsc -p src/program",
+    "start": "node bld/program/main.js",
+    "ci-test": "yarn build && yarn start"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/makeflow/iveread.git"
