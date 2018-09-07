@@ -38,8 +38,10 @@ export class ReadRecords {
 
         resolvedPath = Path.join(GIT_DIR_PATH, relativePathToRoot);
       } else {
-        resolvedPath = Path.resolve(path, watchedPath);
+        resolvedPath = Path.join(path, watchedPath);
       }
+
+      resolvedPath = Path.resolve(resolvedPath);
 
       let scopes = [{markdownPath: path, committers}];
 
