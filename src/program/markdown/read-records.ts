@@ -80,6 +80,8 @@ export class ReadRecords {
       }
 
       path = Path.join(path, '..');
+
+      console.log(path);
     }
   }
 }
