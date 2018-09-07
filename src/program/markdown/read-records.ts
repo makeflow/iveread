@@ -51,6 +51,8 @@ export class ReadRecords {
 
       this.table.set(resolvedPath, scopes);
     }
+
+    console.log('table', this.table);
   }
 
   checkReadAboutByCommitter(path: string, committer: string): void {
