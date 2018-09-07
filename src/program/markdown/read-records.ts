@@ -1,6 +1,6 @@
 import * as Path from 'path';
 
-import {CONFIG_DIR_PATH, shortenPath} from '../utils/config';
+import {GIT_DIR_PATH, shortenPath} from '../utils/config';
 import {readFile} from '../utils/file';
 
 import {parse} from './parser';
@@ -14,7 +14,7 @@ export interface MarkdownReadListScope {
   committers: CommitterList;
 }
 
-export class ReadInfoTable {
+export class ReadRecords {
   private table = new Map<string, MarkdownReadListScope[]>();
 
   async process(path: string) {
@@ -36,7 +36,7 @@ export class ReadInfoTable {
 
         let relativePathToRoot = watchedPath.slice(matchedHead.length);
 
-        resolvedPath = Path.join(CONFIG_DIR_PATH, relativePathToRoot);
+        resolvedPath = Path.join(GIT_DIR_PATH, relativePathToRoot);
       } else {
         resolvedPath = Path.resolve(path, watchedPath);
       }

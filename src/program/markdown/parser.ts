@@ -1,4 +1,4 @@
-import {CommitterList} from './read-info-table';
+import {CommitterList} from './read-records';
 
 const REGEX_IVEREAD_SECTION = /```iveread: (.*?)\s+((.|\s)*?)\s*```/;
 

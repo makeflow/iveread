@@ -71,6 +71,7 @@ export const CONFIG_DIR_PATH = CONFIG_PATH
 
 export interface Config {
   docDir: string;
+  gitDir: string;
 }
 
 export const config = new ConfigService<Config>(CONFIG_PATH);
@@ -78,4 +79,9 @@ export const config = new ConfigService<Config>(CONFIG_PATH);
 export const DOC_DIR_PATH = Path.join(
   CONFIG_DIR_PATH,
   config.get('docDir', ''),
+);
+
+export const GIT_DIR_PATH = Path.join(
+  CONFIG_DIR_PATH,
+  config.get('gitDir', ''),
 );

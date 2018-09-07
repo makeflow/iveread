@@ -1,4 +1,4 @@
-import {ReadInfoTable} from './markdown/read-info-table';
+import {ReadRecords} from './markdown/read-records';
 import {DOC_DIR_PATH} from './utils/config';
 import {find} from './utils/file';
 
@@ -8,7 +8,7 @@ import {find} from './utils/file';
 // git status test
 
 async function checkRead() {
-  let readTable = new ReadInfoTable();
+  let readTable = new ReadRecords();
 
   let markdownFiles = await find(DOC_DIR_PATH, /\.md$/);
 
