@@ -1,39 +1,39 @@
 {
-    "name": "iveread",
-    "version": "0.0.1",
-    "description": "A CI tool to help get messages across.",
-    "author": "Dizy",
-    "license": "MIT",
-    "bin": {
-      "iveread": "bld/program/main.js"
-    },
-    "scripts": {
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/makeflow/iveread.git"
-    },
-    "keywords": [
-      "CI",
-      "document",
-      "cli",
-      "read"
-    ],
-    "bugs": {
-      "url": "https://github.com/makeflow/iveread/issues"
-    },
-    "homepage": "https://github.com/makeflow/iveread#readme",
-    "files": [
-      "bld/program/**/*.js"
-    ],
-    "dependencies": {
-    },
-    "devDependencies": {
-      "@magicspace/configs": "^0.1.29",
-      "@types/node": "^10.5.7",
-      "rimraf": "^2.6.2",
-      "tslint": "^5.11.0",
-      "tslint-language-service": "^0.9.9",
-      "typescript": "^3.0.1"
-    }
+  "name": "iveread",
+  "version": "0.0.1",
+  "description": "A CI tool to help get messages across.",
+  "author": "Dizy",
+  "license": "MIT",
+  "bin": {
+    "iveread": "bld/program/main.js"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/makeflow/iveread.git"
+  },
+  "keywords": [
+    "CI",
+    "document",
+    "cli",
+    "read"
+  ],
+  "bugs": {
+    "url": "https://github.com/makeflow/iveread/issues"
+  },
+  "homepage": "https://github.com/makeflow/iveread#readme",
+  "files": [
+    "bld/program/**/*.js"
+  ],
+  "dependencies": {
+    "simple-git": "^1.96.0"
+  },
+  "devDependencies": {
+    "@magicspace/configs": "^0.1.29",
+    "@types/node": "^10.5.7",
+    "rimraf": "^2.6.2",
+    "tslint": "^5.11.0",
+    "tslint-language-service": "^0.9.9",
+    "typescript": "^3.0.1"
   }
+}
