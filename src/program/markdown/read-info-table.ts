@@ -1,6 +1,6 @@
 import * as Path from 'path';
 
-import {CONFIG_DIR_PATH, CONFIG_PATH} from '../utils/config';
+import {CONFIG_DIR_PATH, shortenPath} from '../utils/config';
 import {readFile} from '../utils/file';
 
 import {parse} from './parser';
@@ -18,8 +18,6 @@ export class ReadInfoTable {
   private table = new Map<string, MarkdownReadListScope[]>();
 
   async process(path: string) {
-    path = Path.resolve(path);
-
     let buffer = await readFile(path);
 
     let result = parse(buffer.toLocaleString());
@@ -45,15 +43,43 @@ export class ReadInfoTable {
 
       let scopes = [{markdownPath: path, committers}];
 
-      if (this.table.has(resolvedPath)) {
-        let originalScopes = this.table.get(resolvedPath)!;
+      let originalScopes = this.table.get(resolvedPath);
 
+      if (originalScopes) {
         scopes = originalScopes.concat(scopes);
       }
 
       this.table.set(resolvedPath, scopes);
     }
+
+    console.log(this.table);
   }
 
-  isReadByCommitter(path: string, committer: string): boolean {}
+  checkReadAboutByCommitter(path: string, committer: string): void {
+    let lastPath;
+
+    while (path !== lastPath) {
+      lastPath = path;
+
+      let scopes = this.table.get(path);
+
+      if (scopes) {
+        for (let scope of scopes) {
+          let {markdownPath, committers} = scope;
+
+          if (committers.indexOf(committer) === -1) {
+            throw new Error(
+              `Document about path \`${shortenPath(
+                path,
+              )}\` is not read by committer \`${committer}\`. (${shortenPath(
+                markdownPath,
+              )})`,
+            );
+          }
+        }
+      }
+
+      path = Path.join(path, '..');
+    }
+  }
 }

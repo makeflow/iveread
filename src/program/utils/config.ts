@@ -1,28 +1,9 @@
 import * as FS from 'fs';
 import * as Path from 'path';
 
-const CONFIG_FILENAME = 'iveread.json';
+export const CONFIG_FILENAME = 'iveread.json';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
-
-export function getConfigPath(): string | undefined {
-  let rootDir = __dirname;
-  let lastRootDir;
-
-  while (FS.existsSync(rootDir) && lastRootDir !== rootDir) {
-    lastRootDir = rootDir;
-
-    let configPath = Path.join(rootDir, CONFIG_FILENAME);
-
-    if (FS.existsSync(configPath)) {
-      return configPath;
-    }
-
-    rootDir = Path.join(rootDir, '..');
-  }
-
-  return undefined;
-}
 
 export type keys<T> = T extends object ? keyof T : never;
 
@@ -55,8 +36,31 @@ export class ConfigService<T extends object> {
   }
 }
 
-export interface Config {
-  docDir: string;
+export function getConfigPath(): string | undefined {
+  let rootDir = __dirname;
+  let lastRootDir;
+
+  while (FS.existsSync(rootDir) && lastRootDir !== rootDir) {
+    lastRootDir = rootDir;
+
+    let configPath = Path.join(rootDir, CONFIG_FILENAME);
+
+    if (FS.existsSync(configPath)) {
+      return configPath;
+    }
+
+    rootDir = Path.join(rootDir, '..');
+  }
+
+  return undefined;
+}
+
+export function shortenPath(path: string): string {
+  if (path.startsWith(CONFIG_DIR_PATH)) {
+    return path.slice(CONFIG_DIR_PATH.length + 1);
+  }
+
+  return path;
 }
 
 export const CONFIG_PATH = getConfigPath();
@@ -65,4 +69,13 @@ export const CONFIG_DIR_PATH = CONFIG_PATH
   ? Path.dirname(CONFIG_PATH)
   : process.cwd();
 
+export interface Config {
+  docDir: string;
+}
+
 export const config = new ConfigService<Config>(CONFIG_PATH);
+
+export const DOC_DIR_PATH = Path.join(
+  CONFIG_DIR_PATH,
+  config.get('docDir', ''),
+);

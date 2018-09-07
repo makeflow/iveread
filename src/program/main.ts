@@ -1,5 +1,5 @@
-import {ReadInfoTable} from './markdown/read-table';
-import {config} from './utils/config';
+import {ReadInfoTable} from './markdown/read-info-table';
+import {DOC_DIR_PATH} from './utils/config';
 import {find} from './utils/file';
 
 // muticommit 1
@@ -10,11 +10,16 @@ import {find} from './utils/file';
 async function checkRead() {
   let readTable = new ReadInfoTable();
 
-  let markdownFiles = await find(config.get('docDir', ''), /\.md$/);
+  let markdownFiles = await find(DOC_DIR_PATH, /\.md$/);
 
   for (let file of markdownFiles) {
-    readTable.process(file);
+    await readTable.process(file);
   }
+
+  readTable.checkReadAboutByCommitter(
+    'D:\\Projects\\Bus\\Makeflow\\iveread\\hello',
+    'dizy',
+  );
 }
 
 checkRead().catch(console.error);
