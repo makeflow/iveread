@@ -9,8 +9,6 @@ async function checkRead() {
 
   let commitInfos = await getCommitInfosFromTravis();
 
-  console.log('processedCommitInfos', commitInfos);
-
   if (commitInfos) {
     for (let commitInfo of commitInfos) {
       await checker.check(commitInfo);

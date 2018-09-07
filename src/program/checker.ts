@@ -13,8 +13,6 @@ export class ReadRecordChecker {
   async collectReadRecords(): Promise<void> {
     let docs = await find(this.docDir, /\.md$/);
 
-    console.log('docs', docs);
-
     for (let doc of docs) {
       await this.readRecords.process(doc);
     }
@@ -25,8 +23,6 @@ export class ReadRecordChecker {
 
     for (let file of files) {
       file = Path.join(GIT_DIR_PATH, file);
-
-      console.log('file', file);
 
       this.readRecords.checkReadAboutByCommitter(file, committer);
     }

@@ -36,8 +36,6 @@ export function getTravisCommitRange(): TravisCommitRange | undefined {
 
   let rangeString = TRAVIS_COMMIT_RANGE ? TRAVIS_COMMIT_RANGE : '';
 
-  console.log('range', rangeString);
-
   if (rangeString.includes('...')) {
     let ends = rangeString.split('...');
 
@@ -58,8 +56,6 @@ export async function getCommitsInRange(
 
   let {stdout} = await exec(`git log --pretty=%H ${from}...${to}`);
 
-  console.log('commits', stdout);
-
   let hashes = stdout
     .split('\n')
     .map(value => {
@@ -76,8 +72,6 @@ export async function getCommitInfo(commit: string): Promise<CommitInfo> {
   let {stdout} = await exec(`git show ${commit} --stat`);
 
   let committerMatch = stdout.match(REGEX_COMMITTER_MATCHER);
-
-  console.log('commitInfo', stdout);
 
   if (!committerMatch) {
     throw new Error(`Not able to show author of git commit ${commit}.`);
