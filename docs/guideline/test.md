@@ -2,8 +2,6 @@
 
 ## Test Section
 
-```iveread: @/hello
+```iveread: @/docs/guideline
 dizy
-heikezy
-Dizy Zeng
 ```

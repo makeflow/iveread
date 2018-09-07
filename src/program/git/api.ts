@@ -2,7 +2,7 @@ import * as Process from 'child_process';
 
 const REGEX_COMMITTER_MATCHER = /Author: (.*?) <(?:.*?)>/;
 
-const REGEX_FILE_CHANGES_MATCHER = /^ ([\w\\/\.]+) \|/gm;
+const REGEX_FILE_CHANGES_MATCHER = /^ ([\w\\/\.]+)( )+\|/gm;
 
 export interface ExecStdOut {
   stdout: string;
