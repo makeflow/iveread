@@ -16,4 +16,8 @@ async function checkRead() {
   }
 }
 
-checkRead().catch(console.error);
+checkRead().catch(error => {
+  console.error(error);
+
+  process.exit(-1);
+});

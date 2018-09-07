@@ -79,8 +79,6 @@ export async function getCommitInfo(commit: string): Promise<CommitInfo> {
 
   let committer = committerMatch[1];
 
-  console.log(stdout);
-
   let fileChanges = stdout.match(REGEX_FILE_CHANGES_MATCHER);
 
   if (!fileChanges) {

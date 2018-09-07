@@ -2,6 +2,6 @@
 
 ## Test Section
 
-```iveread: @/docs/guideline
+```iveread: @/docs/
 dizy
 ```
