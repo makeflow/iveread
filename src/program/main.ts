@@ -1,25 +1,19 @@
-import {ReadRecords} from './markdown/read-records';
+import {ReadRecordChecker} from './checker';
+import {getCommitInfosFromTravis} from './git/api';
 import {DOC_DIR_PATH} from './utils/config';
-import {find} from './utils/file';
-
-// muticommit 1
-// muticommit 2
-// muticommit 3
-// git status test
 
 async function checkRead() {
-  let readTable = new ReadRecords();
+  let checker = new ReadRecordChecker(DOC_DIR_PATH);
 
-  let markdownFiles = await find(DOC_DIR_PATH, /\.md$/);
+  await checker.collectReadRecords();
 
-  for (let file of markdownFiles) {
-    await readTable.process(file);
+  let commitInfos = await getCommitInfosFromTravis();
+
+  if (commitInfos) {
+    for (let commitInfo of commitInfos) {
+      checker.check(commitInfo);
+    }
   }
-
-  readTable.checkReadAboutByCommitter(
-    'D:\\Projects\\Bus\\Makeflow\\iveread\\hello',
-    'dizy',
-  );
 }
 
 checkRead().catch(console.error);

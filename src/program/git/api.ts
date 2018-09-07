@@ -71,8 +71,6 @@ export async function getCommitsInRange(
 export async function getCommitInfo(commit: string): Promise<CommitInfo> {
   let {stdout} = await exec(`git show ${commit} --stat`);
 
-  console.log(stdout);
-
   let committerMatch = stdout.match(REGEX_COMMITTER_MATCHER);
 
   if (!committerMatch) {
@@ -98,4 +96,26 @@ export async function getCommitInfo(commit: string): Promise<CommitInfo> {
   }
 
   return {committer, files};
+}
+
+export async function getCommitInfosFromTravis(): Promise<
+  CommitInfo[] | undefined
+> {
+  let range = getTravisCommitRange();
+
+  if (range) {
+    let commits = await getCommitsInRange(range);
+
+    let commitInfos: CommitInfo[] = [];
+
+    for (let commit of commits) {
+      let commitInfo = await getCommitInfo(commit);
+
+      commitInfos.push(commitInfo);
+    }
+
+    return commitInfos;
+  }
+
+  return undefined;
 }
