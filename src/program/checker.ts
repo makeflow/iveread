@@ -24,7 +24,7 @@ export class ReadRecordChecker {
     for (let file of files) {
       file = Path.join(GIT_DIR_PATH, file);
 
-      this.readRecords.checkReadAboutByCommitter(file, committer);
+      this.readRecords.checkIsReadByCommitter(file, committer);
     }
   }
 }

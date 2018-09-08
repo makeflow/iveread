@@ -55,7 +55,7 @@ export class ReadRecords {
     }
   }
 
-  checkReadAboutByCommitter(path: string, committer: string): void {
+  checkIsReadByCommitter(path: string, committer: string): void {
     let lastPath;
 
     while (path !== lastPath) {
@@ -69,7 +69,7 @@ export class ReadRecords {
 
           if (committers.indexOf(committer) === -1) {
             throw new Error(
-              `Document about path \`${shortenPath(
+              `Document describing path \`${shortenPath(
                 path,
               )}\` is not read by committer \`${committer}\`. (${shortenPath(
                 markdownPath,
