@@ -1,7 +1,49 @@
 # IveRead
 
-```
-git log --oneline 40b0c26ad9e2...15d7dc5ad9a0
+## Install
 
-git show 3d6f3f5 --stat
+```bash
+yarn install iveread -D
+```
+
+## Configuration
+
+`iveread.json`
+
+```json
+{
+  "docDir": "docs/guideline"
+}
+```
+
+## Markdown Format
+
+````markdown
+## Who's read this
+
+```iveread: @/src/task
+Dizy Zeng
+Mr Nobody
+Someone
+```
+````
+
+## Travis CI Configuration
+
+```
+language: node_js
+
+node_js:
+  - stable
+
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- -- version 1.9.4
+  - export PATH="$HOME/.yarn/bin:$PATH"
+cache:
+  directory:
+    - $HOME/.yarn/bin
+
+install: yarn install
+
+script: yarn iveread
 ```
