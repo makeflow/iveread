@@ -17,7 +17,7 @@ export interface MarkdownReadListScope {
 export class ReadRecords {
   private table = new Map<string, MarkdownReadListScope[]>();
 
-  async process(path: string) {
+  async processFile(path: string) {
     let buffer = await readFile(path);
 
     let result = parse(buffer.toLocaleString());

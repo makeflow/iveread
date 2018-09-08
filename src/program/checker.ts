@@ -11,10 +11,10 @@ export class ReadRecordChecker {
   constructor(private docDir: string) {}
 
   async collectReadRecords(): Promise<void> {
-    let docs = await find(this.docDir, /\.md$/);
+    let docs = await find(this.docDir, '**/*.md');
 
     for (let doc of docs) {
-      await this.readRecords.process(doc);
+      await this.readRecords.processFile(doc);
     }
   }
 
